@@ -1,4 +1,4 @@
-package com.course.server.service.impl;
+package com.course.server.impl;
 
 import com.course.server.dao.TestDao;
 import com.course.server.domain.Test;
