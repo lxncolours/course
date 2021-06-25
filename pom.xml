@@ -8,6 +8,7 @@
 		<module>system</module>
 		<module>gateway</module>
 		<module>server</module>
+		<module>business</module>
 	</modules>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -46,6 +47,12 @@
 				<groupId>mysql</groupId>
 				<artifactId>mysql-connector-java</artifactId>
 				<version>8.0.22</version>
+			</dependency>
+			<!-- mybatis分页插件pagehelper -->
+			<dependency>
+				<groupId>com.github.pagehelper</groupId>
+				<artifactId>pagehelper-spring-boot-starter</artifactId>
+				<version>1.2.10</version>
 			</dependency>
 
 		</dependencies>
