@@ -2,6 +2,7 @@ package com.course.server.impl;
 
 import com.course.server.domain.Chapter;
 import com.course.server.dto.ChapterDto;
+import com.course.server.dto.PageDto;
 import com.course.server.mapper.ChapterMapper;
 import com.course.server.service.ChapterService;
 import com.github.pagehelper.PageHelper;
@@ -20,9 +21,9 @@ public class ChapterServiceImpl implements ChapterService {
     private ChapterMapper chapterMapper;
 
     @Override
-    public List<ChapterDto> list() {
+    public void list(PageDto pageDto) {
         List<ChapterDto> returnList = new ArrayList<>();
-        PageHelper.startPage(1,5);
+        PageHelper.startPage(pageDto.getPage(),pageDto.getSize());
         List<Chapter> chapters = chapterMapper.selectByExample(null);
         PageInfo<Chapter> pageInfo = new PageInfo<>(chapters);
         List<Chapter> list = pageInfo.getList();
@@ -31,7 +32,7 @@ public class ChapterServiceImpl implements ChapterService {
             BeanUtils.copyProperties(chapter,chapterDto);
             returnList.add(chapterDto);
         }
-        return returnList;
-
+        pageDto.setTotal(pageInfo.getTotal());
+        pageDto.setList(returnList);
     }
 }

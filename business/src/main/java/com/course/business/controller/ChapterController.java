@@ -1,7 +1,9 @@
 package com.course.business.controller;
 
 import com.course.server.dto.ChapterDto;
+import com.course.server.dto.PageDto;
 import com.course.server.service.ChapterService;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,9 +18,9 @@ public class ChapterController {
 
 
     @RequestMapping("/findChapterList")
-    public List<ChapterDto> findChapterList(){
-        List<ChapterDto> list = chapterService.list();
-        return list;
+    public PageDto findChapterList(@RequestBody PageDto pageDto){
+        chapterService.list(pageDto);
+        return pageDto;
     }
 
 
