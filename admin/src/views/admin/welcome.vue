@@ -11,7 +11,6 @@ export default {
   methods:{
   },
   mounted:function (){
-    this.$parent.activeSidebar("welcome-sidebar")
   }
 }
 </script>
