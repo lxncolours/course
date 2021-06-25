@@ -79,9 +79,9 @@
 
 <script>
 
-    $('body').attr('class', 'login-layout blur-login');
+$('body').attr('class', 'login-layout blur-login');
 export default {
-  name: 'App',
+  name: 'login',
 }
 </script>
 
