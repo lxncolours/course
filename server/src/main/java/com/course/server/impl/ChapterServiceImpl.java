@@ -24,16 +24,11 @@ public class ChapterServiceImpl implements ChapterService {
 
     @Override
     public void list(PageDto pageDto) {
-        List<ChapterDto> returnList = new ArrayList<>();
         PageHelper.startPage(pageDto.getPage(),pageDto.getSize());
         List<Chapter> chapters = chapterMapper.selectByExample(null);
         PageInfo<Chapter> pageInfo = new PageInfo<>(chapters);
         List<Chapter> list = pageInfo.getList();
-        for (Chapter chapter : list) {
-            ChapterDto chapterDto = new ChapterDto();
-            BeanUtils.copyProperties(chapter,chapterDto);
-            returnList.add(chapterDto);
-        }
+        List<ChapterDto> returnList = CopyUtil.copyList(list, ChapterDto.class);
         pageDto.setTotal(pageInfo.getTotal());
         pageDto.setList(returnList);
     }
