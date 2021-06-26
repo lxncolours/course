@@ -11,6 +11,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ public class ChapterServiceImpl implements ChapterService {
 
     @Override
     public void list(PageDto pageDto) {
-        PageHelper.startPage(pageDto.getPage(),pageDto.getSize());
+        PageHelper.startPage(pageDto.getPage(), pageDto.getSize());
         List<Chapter> chapters = chapterMapper.selectByExample(null);
         PageInfo<Chapter> pageInfo = new PageInfo<>(chapters);
         List<Chapter> list = pageInfo.getList();
@@ -34,8 +35,30 @@ public class ChapterServiceImpl implements ChapterService {
     }
 
     @Override
-    public void save(Chapter chapter) {
-        chapter.setId(UuidUtil.getShortUuid());
+    public void save(ChapterDto chapterDto) {
+        Chapter chapter = CopyUtil.copy(chapterDto, Chapter.class);
+        if (StringUtils.isEmpty(chapter.getId())) {
+            chapter.setId(UuidUtil.getShortUuid());
+            this.insert(chapter);
+        } else {
+            this.update(chapter);
+        }
+    }
+
+    @Override
+    public void insert(Chapter chapter) {
         chapterMapper.insert(chapter);
     }
+
+    @Override
+    public void update(Chapter chapter) {
+        chapterMapper.updateByPrimaryKey(chapter);
+    }
+
+    @Override
+    public void delete(String id) {
+        chapterMapper.deleteByPrimaryKey(id);
+    }
+
+
 }

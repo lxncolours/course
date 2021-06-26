@@ -1,12 +1,11 @@
 package com.course.business.controller;
 
 import com.course.server.domain.Chapter;
+import com.course.server.dto.ChapterDto;
 import com.course.server.dto.PageDto;
 import com.course.server.dto.ResponseDto;
 import com.course.server.service.ChapterService;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -25,12 +24,18 @@ public class ChapterController {
         return responseDto;
     }
 
-    @RequestMapping("/saveChapter")
-    public ResponseDto<Chapter> saveChapter(@RequestBody Chapter chapter){
-        ResponseDto<Chapter> responseDto = new ResponseDto<>();
-        chapterService.save(chapter);
-        responseDto.setContent(chapter);
+    @PostMapping("/save")
+    public ResponseDto<ChapterDto> save(@RequestBody ChapterDto chapterDto){
+        ResponseDto<ChapterDto> responseDto = new ResponseDto<>();
+        chapterService.save(chapterDto);
+        responseDto.setContent(chapterDto);
         return responseDto;
+    }
+
+    @PostMapping("/delete/{id}")
+    public ResponseDto<ChapterDto> delete(@PathVariable String id){
+        chapterService.delete(id);
+        return new ResponseDto<>();
     }
 
 }

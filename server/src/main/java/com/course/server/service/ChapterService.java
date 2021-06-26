@@ -9,7 +9,13 @@ import com.course.server.dto.PageDto;
 
 public interface ChapterService {
 
-    public void list(PageDto pageDto);
+    void list(PageDto pageDto);
 
-    void save(Chapter chapter);
+    void save(ChapterDto chapterDto);
+
+    void insert(Chapter chapter);
+
+    void update(Chapter chapter);
+
+    void delete(String id);
 }
