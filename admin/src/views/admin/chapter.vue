@@ -69,9 +69,6 @@
       </tr>
 
 
-
-
-
       </tbody>
     </table>
 
@@ -132,20 +129,25 @@ export default {
     },
     save() {
       let _this = this;
+      Loading.show();
       _this.$ajax.post("http://localhost:9000/business/admin/chapter/save", _this.chapter).then((response) => {
+        Loading.hide();
         let resp = response.data;
         if (resp.success) {
           $("#form-modal").modal("hide");
           _this.list(1);
+          Toast.success("保存成功！");
         }
       })
     },
     list(page) {
       let _this = this;
+      Loading.show();
       _this.$ajax.post("http://localhost:9000/business/admin/chapter/findChapterList", {
         page: page,
         size: _this.$refs.pagination.size
       }).then((response) => {
+        Loading.hide();
         let resp = response.data;
         _this.chapters = resp.content.list;
         _this.$refs.pagination.render(page, resp.content.total);
@@ -158,12 +160,17 @@ export default {
     },
     del(id) {
       let _this = this;
-      _this.$ajax.delete("http://localhost:9000/business/admin/chapter/delete/" + id).then((response) => {
-        let resp = response.data;
-        if (resp.success) {
-          _this.list(1);
-        }
-      })
+      Confirm.show("删除大章后不可恢复，确认删除？", function () {
+        Loading.show();
+        _this.$ajax.delete("http://localhost:9000/business/admin/chapter/delete/" + id).then((response) => {
+          Loading.hide();
+          let resp = response.data;
+          if (resp.success) {
+            _this.list(1);
+            Toast.success("删除成功！");
+          }
+        })
+      });
     }
   }
   ,

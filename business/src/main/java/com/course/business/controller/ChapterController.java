@@ -32,7 +32,7 @@ public class ChapterController {
         return responseDto;
     }
 
-    @PostMapping("/delete/{id}")
+    @RequestMapping("/delete/{id}")
     public ResponseDto<ChapterDto> delete(@PathVariable String id){
         chapterService.delete(id);
         return new ResponseDto<>();
