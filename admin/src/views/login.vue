@@ -7,10 +7,8 @@
             <div class="center">
               <h1>
                 <i class="ace-icon fa fa-leaf green"></i>
-                <span class="red">造梦</span>
-                <span class="white" id="id-text2">管理后台</span>
+                <span class="">控台登录</span>
               </h1>
-              <h4 class="blue" id="id-company-text">&copy; Dream Home</h4>
             </div>
 
             <div class="space-6"></div>
@@ -21,7 +19,7 @@
                   <div class="widget-main">
                     <h4 class="header blue lighter bigger">
                       <i class="ace-icon fa fa-coffee green"></i>
-                      请输入账号密码
+                      请输入用户名密码
                     </h4>
 
                     <div class="space-6"></div>
@@ -29,17 +27,17 @@
                     <form>
                       <fieldset>
                         <label class="block clearfix">
-														<span class="block input-icon input-icon-right">
-															<input type="text" class="form-control" placeholder="Username"/>
-															<i class="ace-icon fa fa-user"></i>
-														</span>
+                          <span class="block input-icon input-icon-right">
+                            <input type="text" class="form-control" placeholder="Username"/>
+                            <i class="ace-icon fa fa-user"></i>
+                          </span>
                         </label>
 
                         <label class="block clearfix">
-														<span class="block input-icon input-icon-right">
-															<input type="password" class="form-control" placeholder="Password"/>
-															<i class="ace-icon fa fa-lock"></i>
-														</span>
+                          <span class="block input-icon input-icon-right">
+                            <input type="password" class="form-control" placeholder="Password"/>
+                            <i class="ace-icon fa fa-lock"></i>
+                          </span>
                         </label>
 
                         <div class="space"></div>
@@ -47,10 +45,12 @@
                         <div class="clearfix">
                           <label class="inline">
                             <input type="checkbox" class="ace"/>
-                            <span class="lbl">记住密码</span>
+                            <span class="lbl">记住我</span>
                           </label>
 
-                          <button v-on:click="login()" type="button" class="width-35 pull-right btn btn-sm btn-primary">
+                          <button type="button"
+                                  class="width-35 pull-right btn btn-sm btn-primary"
+                                  v-on:click="login()">
                             <i class="ace-icon fa fa-key"></i>
                             <span class="bigger-110">登录</span>
                           </button>
@@ -60,14 +60,10 @@
                       </fieldset>
                     </form>
 
-                    <div class="space-6"></div>
-
                   </div><!-- /.widget-main -->
 
                 </div><!-- /.widget-body -->
               </div><!-- /.login-box -->
-
-
             </div><!-- /.position-relative -->
 
           </div>
@@ -78,18 +74,17 @@
 </template>
 
 <script>
-
-export default {
-  name: 'login',
-  mounted:function () {
-    $('body').removeClass('no-skin');
-    $('body').attr('class', 'login-layout blur-login');
+  export default {
+    name: "login",
+    mounted: function() {
+      $("body").removeClass("no-skin");
+      $("body").attr("class", "login-layout light-login");
+      // console.log("login");
     },
-  methods:{
-    login(){
-      this.$router.push("/welcome")
+    methods: {
+      login () {
+        this.$router.push("/welcome")
+      }
     }
   }
-}
 </script>
-

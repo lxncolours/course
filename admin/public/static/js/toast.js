@@ -5,7 +5,7 @@ Toast = {
       icon: 'success',
       title: message,
       showConfirmButton: false,
-      timer: 10000
+      timer: 3000
     })
   },
 
@@ -15,7 +15,7 @@ Toast = {
       icon: 'error',
       title: message,
       showConfirmButton: false,
-      timer: 5000
+      timer: 3000
     })
   },
 
@@ -25,7 +25,7 @@ Toast = {
       icon: 'warning',
       title: message,
       showConfirmButton: false,
-      timer: 5000
+      timer: 3000
     })
   }
 };

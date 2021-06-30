@@ -6,7 +6,6 @@
 <generatorConfiguration>
     <context id="Mysql" targetRuntime="MyBatis3" defaultModelType="flat">
 
-        <property name="autoDelimitKeywords" value="true"/>
         <property name="beginningDelimiter" value="`"/>
         <property name="endingDelimiter" value="`"/>
 
@@ -21,9 +20,9 @@
         </commentGenerator>
 
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://localhost:3306/courseimooc?serverTimezone=Asia/Shanghai"
-                        userId="course"
-                        password="liberica">
+                        connectionURL="jdbc:mysql://localhost:3306/courseimooc"
+                        userId="courseimooc"
+                        password="courseimooc">
         </jdbcConnection>
 
         <!-- domain类的位置 -->
@@ -40,20 +39,9 @@
                              type="XMLMAPPER" />
 
 <!--        <table tableName="test" domainObjectName="Test"/>-->
-        <table tableName="chapter" domainObjectName="Chapter"/>
+<!--        <table tableName="chapter" domainObjectName="Chapter"/>-->
 <!--        <table tableName="section" domainObjectName="Section"/>-->
 <!--        <table tableName="course" domainObjectName="Course"/>-->
-<!--        <table tableName="course_content" domainObjectName="CourseContent"/>-->
-<!--        <table tableName="course_content_file" domainObjectName="CourseContentFile"/>-->
-<!--        <table tableName="teacher" domainObjectName="Teacher"/>-->
-<!--        <table tableName="file" domainObjectName="File"/>-->
-<!--        <table tableName="user" domainObjectName="User"/>-->
-<!--        <table tableName="resource" domainObjectName="Resource"/>-->
-<!--        <table tableName="role" domainObjectName="Role"/>-->
-<!--        <table tableName="role_resource" domainObjectName="RoleResource"/>-->
-<!--        <table tableName="role_user" domainObjectName="RoleUser"/>-->
-<!--        <table tableName="member" domainObjectName="Member"/>-->
-<!--        <table tableName="sms" domainObjectName="Sms"/>-->
-<!--        <table tableName="test" domainObjectName="Test"/>-->
+        <table tableName="course_category" domainObjectName="CourseCategory"/>
     </context>
 </generatorConfiguration>

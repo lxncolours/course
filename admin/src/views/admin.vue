@@ -16,7 +16,7 @@
           <a href="index.html" class="navbar-brand">
             <small>
               <i class="fa fa-leaf"></i>
-              造梦家纺
+              在线视频课程
             </small>
           </a>
         </div>
@@ -184,7 +184,7 @@
                   <ul class="dropdown-menu dropdown-navbar">
                     <li>
                       <a href="#" class="clearfix">
-                        <img src="../../public/ace/assets/images/avatars/avatar.png" class="msg-photo" alt="Alex's Avatar"/>
+                        <img src="../../public/ace/assets/images/avatars/avatar.png" class="msg-photo" alt="Alex's Avatar" />
                         <span class="msg-body">
 													<span class="msg-title">
 														<span class="blue">Alex:</span>
@@ -201,7 +201,7 @@
 
                     <li>
                       <a href="#" class="clearfix">
-                        <img src="../../public/ace/assets/images/avatars/avatar3.png" class="msg-photo" alt="Susan's Avatar"/>
+                        <img src="../../public/ace/assets/images/avatars/avatar3.png" class="msg-photo" alt="Susan's Avatar" />
                         <span class="msg-body">
 													<span class="msg-title">
 														<span class="blue">Susan:</span>
@@ -218,7 +218,7 @@
 
                     <li>
                       <a href="#" class="clearfix">
-                        <img src="../../public/ace/assets/images/avatars/avatar4.png" class="msg-photo" alt="Bob's Avatar"/>
+                        <img src="../../public/ace/assets/images/avatars/avatar4.png" class="msg-photo" alt="Bob's Avatar" />
                         <span class="msg-body">
 													<span class="msg-title">
 														<span class="blue">Bob:</span>
@@ -235,7 +235,7 @@
 
                     <li>
                       <a href="#" class="clearfix">
-                        <img src="../../public/ace/assets/images/avatars/avatar2.png" class="msg-photo" alt="Kate's Avatar"/>
+                        <img src="../../public/ace/assets/images/avatars/avatar2.png" class="msg-photo" alt="Kate's Avatar" />
                         <span class="msg-body">
 													<span class="msg-title">
 														<span class="blue">Kate:</span>
@@ -252,7 +252,7 @@
 
                     <li>
                       <a href="#" class="clearfix">
-                        <img src="../../public/ace/assets/images/avatars/avatar5.png" class="msg-photo" alt="Fred's Avatar"/>
+                        <img src="../../public/ace/assets/images/avatars/avatar5.png" class="msg-photo" alt="Fred's Avatar" />
                         <span class="msg-body">
 													<span class="msg-title">
 														<span class="blue">Fred:</span>
@@ -280,7 +280,7 @@
 
             <li class="light-blue dropdown-modal">
               <a data-toggle="dropdown" href="#" class="dropdown-toggle">
-                <img class="nav-user-photo" src="../../public/ace/assets/images/avatars/user.jpg" alt="Jason's Photo"/>
+                <img class="nav-user-photo" src="../../public/ace/assets/images/avatars/user.jpg" alt="Jason's Photo" />
                 <span class="user-info">
 									<small>Welcome,</small>
 									Jason
@@ -320,10 +320,7 @@
     </div>
 
     <div class="main-container ace-save-state" id="main-container">
-
-
       <div id="sidebar" class="sidebar                  responsive                    ace-save-state">
-
 
         <div class="sidebar-shortcuts" id="sidebar-shortcuts">
           <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
@@ -364,7 +361,8 @@
 
             <b class="arrow"></b>
           </li>
-          <li>
+
+          <li class="">
             <a href="#" class="dropdown-toggle">
               <i class="menu-icon fa fa-list"></i>
               <span class="menu-text"> 系统管理 </span>
@@ -378,7 +376,7 @@
               <li class="">
                 <a href="tables.html">
                   <i class="menu-icon fa fa-caret-right"></i>
-                   用户管理
+                  用户管理
                 </a>
 
                 <b class="arrow"></b>
@@ -406,10 +404,34 @@
             <b class="arrow"></b>
 
             <ul class="submenu">
-              <li id="business-chapter-sidebar">
+              <li class="active" id="business-category-sidebar">
+                <router-link to="/business/category">
+                  <i class="menu-icon fa fa-caret-right"></i>
+                  分类管理
+                </router-link>
+
+                <b class="arrow"></b>
+              </li>
+              <li class="active" id="business-course-sidebar">
+                <router-link to="/business/course">
+                  <i class="menu-icon fa fa-caret-right"></i>
+                  课程管理
+                </router-link>
+
+                <b class="arrow"></b>
+              </li>
+              <li class="active" id="business-chapter-sidebar">
                 <router-link to="/business/chapter">
                   <i class="menu-icon fa fa-caret-right"></i>
                   大章管理
+                </router-link>
+
+                <b class="arrow"></b>
+              </li>
+              <li class="active" id="business-section-sidebar">
+                <router-link to="/business/section">
+                  <i class="menu-icon fa fa-caret-right"></i>
+                  小节管理
                 </router-link>
 
                 <b class="arrow"></b>
@@ -418,28 +440,20 @@
             </ul>
           </li>
 
-
-
-
-
         </ul><!-- /.nav-list -->
 
         <div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
-          <i id="sidebar-toggle-icon" class="ace-icon fa fa-angle-double-left ace-save-state"
-             data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
+          <i id="sidebar-toggle-icon" class="ace-icon fa fa-angle-double-left ace-save-state" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
         </div>
       </div>
 
       <div class="main-content">
         <div class="main-content-inner">
-          <div class="breadcrumbs ace-save-state" id="breadcrumbs">
-          </div>
-
           <div class="page-content">
             <div class="row">
               <div class="col-xs-12">
                 <!-- PAGE CONTENT BEGINS -->
-                  <router-view/>
+                <router-view/>
                 <!-- PAGE CONTENT ENDS -->
               </div><!-- /.col -->
             </div><!-- /.row -->
@@ -451,8 +465,23 @@
         <div class="footer-inner">
           <div class="footer-content">
 						<span class="bigger-120">
-							<span class="blue bolder">造梦</span>
-							Dream Home &copy; 2013-2021
+							<span class="blue bolder">甲蛙</span>
+							在线视频课程 &copy; 2099-2099
+						</span>
+
+            &nbsp; &nbsp;
+            <span class="action-buttons">
+							<a href="#">
+								<i class="ace-icon fa fa-twitter-square light-blue bigger-150"></i>
+							</a>
+
+							<a href="#">
+								<i class="ace-icon fa fa-facebook-square text-primary bigger-150"></i>
+							</a>
+
+							<a href="#">
+								<i class="ace-icon fa fa-rss-square orange bigger-150"></i>
+							</a>
 						</span>
           </div>
         </div>
@@ -463,39 +492,40 @@
       </a>
     </div><!-- /.main-container -->
   </div>
-
 </template>
 
 <script>
-
   export default {
-  name: 'admin',
+    name: "admin",
     mounted: function() {
       let _this = this;
-      $('body').removeClass('login-layout blur-login');
-      $('body').attr('class', 'no-skin');
+      $("body").removeClass("login-layout light-login");
+      $("body").attr("class", "no-skin");
+      // console.log("admin");
+      // sidebar激活样式方法二
       _this.activeSidebar(_this.$route.name.replace("/", "-") + "-sidebar");
-  },
+    },
     watch: {
       $route: {
         handler:function(val, oldVal){
           // sidebar激活样式方法二
           console.log("---->页面跳转：", val, oldVal);
           let _this = this;
-
-          if (!_this.hasResourceRouter(val.name)) {
-            _this.$router.push("/login");
-            return;
-          }
-
           _this.$nextTick(function(){  //页面加载完成后执行
             _this.activeSidebar(_this.$route.name.replace("/", "-") + "-sidebar");
           })
         }
       }
     },
-    methods:{
+    methods: {
+      login () {
+        this.$router.push("/admin")
+      },
 
+      /**
+       * 菜单激活样式，id是当前点击的菜单的id
+       * @param id
+       */
       activeSidebar: function (id) {
         // 兄弟菜单去掉active样式，自身增加active样式
         $("#" + id).siblings().removeClass("active");
@@ -506,10 +536,9 @@
         let parentLi = $("#" + id).parents("li");
         if (parentLi) {
           parentLi.siblings().removeClass("open active");
-          parentLi.siblings().find("li").removeClass("active");
           parentLi.addClass("open active");
         }
       }
     }
-}
+  }
 </script>
