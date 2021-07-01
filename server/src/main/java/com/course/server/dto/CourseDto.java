@@ -77,14 +77,14 @@ public class CourseDto {
 
     private List<CategoryDto> categorys;
 
-    private String teachId;
+    private String teacherId;
 
-    public String getTeachId() {
-        return teachId;
+    public String getTeacherId() {
+        return teacherId;
     }
 
-    public void setTeachId(String teachId) {
-        this.teachId = teachId;
+    public void setTeacherId(String teacherId) {
+        this.teacherId = teacherId;
     }
 
     public String getId() {
@@ -216,7 +216,7 @@ public class CourseDto {
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
                 ", categorys=" + categorys +
-                ", teachId='" + teachId + '\'' +
+                ", teachId='" + teacherId + '\'' +
                 '}';
     }
 }
