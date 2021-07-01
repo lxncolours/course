@@ -1,14 +1,13 @@
 package com.course.business.controller.admin;
 
-import com.course.server.dto.CourseCategoryDto;
-import com.course.server.dto.CourseDto;
-import com.course.server.dto.PageDto;
-import com.course.server.dto.ResponseDto;
+import com.course.server.dto.*;
 import com.course.server.service.CourseCategoryService;
+import com.course.server.service.CourseContentService;
 import com.course.server.service.CourseService;
 import com.course.server.util.ValidatorUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -26,6 +25,9 @@ public class CourseController {
 
     @Resource
     private CourseCategoryService courseCategoryService;
+
+    @Resource
+    private CourseContentService courseContentService;
 
     /**
      * 列表查询
@@ -56,6 +58,35 @@ public class CourseController {
     }
 
     /**
+     * 保存，id有值时更新，无值时新增
+     */
+    @PostMapping("/save-content")
+    public ResponseDto saveContent(@RequestBody CourseContentDto courseContentDto) {
+
+        ResponseDto responseDto = new ResponseDto();
+        courseContentService.save(courseContentDto);
+        responseDto.setContent(courseContentDto);
+        return responseDto;
+    }
+
+    /**
+     * 保存，id有值时更新，无值时新增
+     */
+    @GetMapping("/find-content/{id}")
+    public ResponseDto saveContent(@PathVariable String id) {
+
+        ResponseDto responseDto = new ResponseDto();
+        if (StringUtils.isEmpty(id)){
+            responseDto.setSuccess(false);
+            responseDto.setMessage("课程id为空");
+            return responseDto;
+        }
+        CourseContentDto courseContentDto = courseContentService.findContent(id);
+        responseDto.setContent(courseContentDto);
+        return responseDto;
+    }
+
+    /**
      * 删除
      */
     @DeleteMapping("/delete/{id}")
@@ -64,6 +95,8 @@ public class CourseController {
         courseService.delete(id);
         return responseDto;
     }
+
+
 
     /**
      * 查找课程下所有分类
