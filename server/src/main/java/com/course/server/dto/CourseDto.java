@@ -77,6 +77,16 @@ public class CourseDto {
 
     private List<CategoryDto> categorys;
 
+    private String teachId;
+
+    public String getTeachId() {
+        return teachId;
+    }
+
+    public void setTeachId(String teachId) {
+        this.teachId = teachId;
+    }
+
     public String getId() {
         return id;
     }
@@ -191,23 +201,22 @@ public class CourseDto {
 
     @Override
     public String toString() {
-        final StringBuffer sb = new StringBuffer("CourseDto{");
-        sb.append("id='").append(id).append('\'');
-        sb.append(", name='").append(name).append('\'');
-        sb.append(", summary='").append(summary).append('\'');
-        sb.append(", time=").append(time);
-        sb.append(", price=").append(price);
-        sb.append(", image='").append(image).append('\'');
-        sb.append(", level='").append(level).append('\'');
-        sb.append(", charge='").append(charge).append('\'');
-        sb.append(", status='").append(status).append('\'');
-        sb.append(", enroll=").append(enroll);
-        sb.append(", sort=").append(sort);
-        sb.append(", createdAt=").append(createdAt);
-        sb.append(", updatedAt=").append(updatedAt);
-        sb.append(", categorys=").append(categorys);
-        sb.append('}');
-        return sb.toString();
+        return "CourseDto{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", summary='" + summary + '\'' +
+                ", time=" + time +
+                ", price=" + price +
+                ", image='" + image + '\'' +
+                ", level='" + level + '\'' +
+                ", charge='" + charge + '\'' +
+                ", status='" + status + '\'' +
+                ", enroll=" + enroll +
+                ", sort=" + sort +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                ", categorys=" + categorys +
+                ", teachId='" + teachId + '\'' +
+                '}';
     }
-
 }
