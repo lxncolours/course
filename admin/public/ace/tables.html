@@ -3896,16 +3896,16 @@
 				
 				//style the message box
 				var defaultCopyAction = myTable.button(1).action();
-				myTable.button(1).action(function (e, dt, button, config) {
-					defaultCopyAction(e, dt, button, config);
+				myTable.button(1).action(function (e, dt, button, com.course.file.config) {
+					defaultCopyAction(e, dt, button, com.course.file.config);
 					$('.dt-button-info').addClass('gritter-item-wrapper gritter-info gritter-center white');
 				});
 				
 				
 				var defaultColvisAction = myTable.button(0).action();
-				myTable.button(0).action(function (e, dt, button, config) {
+				myTable.button(0).action(function (e, dt, button, com.course.file.config) {
 					
-					defaultColvisAction(e, dt, button, config);
+					defaultColvisAction(e, dt, button, com.course.file.config);
 					
 					
 					if($('.dt-button-collection > .dropdown-menu').length == 0) {

@@ -39,7 +39,7 @@
             <div v-for="teacher in teachers.filter(t=>{return t.id===course.teacherId})"
                  class="profile-activity clearfix">
               <div>
-                <img v-show="!teacher.image" class="pull-left" src="/ace/assets/images/avatars/avatar5.png">
+                <img v-show="!teacher.image" class="pull-left" src="public/ace/assets/images/avatars/avatar5.png">
                 <img v-show="teacher.image" class="pull-left" v-bind:src="teacher.image">
                 <a class="user" href="#"> {{ teacher.name }} </a>
                 <br>
