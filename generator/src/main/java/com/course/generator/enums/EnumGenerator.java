@@ -9,7 +9,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class EnumGenerator {
-    static String path = "admin\\public\\static\\js\\enums.js";
+    static String path = "course\\admin\\public\\static\\js\\enums.js";
 
     public static void main(String[] args) {
         StringBuffer bufferObject = new StringBuffer();
@@ -21,6 +21,7 @@ public class EnumGenerator {
             toJson(CourseLevelEnum.class, bufferObject, bufferArray);
             toJson(CourseChargeEnum.class, bufferObject, bufferArray);
             toJson(CourseStatusEnum.class, bufferObject, bufferArray);
+            toJson(FileUseEnum.class, bufferObject, bufferArray);
 
             StringBuffer buffer = bufferObject.append("\r\n").append(bufferArray);
             writeJs(buffer);
