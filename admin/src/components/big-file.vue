@@ -1,10 +1,10 @@
 <template>
   <div>
-    <button type="button" v-on:click="selectFile()" class="btn btn-white btn-default btn-round">
-      <i class="ace-icon fa fa-upload"></i>
+    <button type="button" v-on:click="selectFile()" className="btn btn-white btn-default btn-round">
+      <i className="ace-icon fa fa-upload"></i>
       {{ text }}
     </button>
-    <input class="hidden" type="file" ref="file" v-on:change="uploadFile()" v-bind:id="inputId+'-input'">
+    <input className="hidden" type="file" ref="file" v-on:change="uploadFile()" v-bind:id="inputId+'-input'">
   </div>
 </template>
 
@@ -23,6 +23,12 @@ export default {
     },
     use: {
       default: ""
+    },
+    shardSize: {
+      default: 50 * 1024
+    },
+    url: {
+      default: "oss-append"
     },
     afterUpload: {
       type: Function,
@@ -78,7 +84,9 @@ export default {
       }
 
       // 文件分片
-      let shardSize = 1 * 1024 * 1024;    //以1MB为一个分片
+      // let shardSize = 10 * 1024 * 1024;    //以10MB为一个分片
+      // let shardSize = 50 * 1024;    //以50KB为一个分片
+      let shardSize = _this.shardSize;
       let shardIndex = 1;		//分片索引，1表示第1个分片
       let size = file.size;
       let shardTotal = Math.ceil(size / shardSize); //总片数
@@ -147,7 +155,7 @@ export default {
 
         param.shard = base64;
 
-        _this.$ajax.post(process.env.VUE_APP_SERVER + '/file/admin/oss-append', param).then((response) => {
+        _this.$ajax.post(process.env.VUE_APP_SERVER + '/file/admin/' + _this.url, param).then((response) => {
           let resp = response.data;
           console.log("上传文件成功：", resp);
           Progress.show(parseInt(shardIndex * 100 / shardTotal));
