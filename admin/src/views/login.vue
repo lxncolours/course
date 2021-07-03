@@ -7,7 +7,7 @@
             <div class="center">
               <h1>
                 <i class="ace-icon fa fa-leaf green"></i>
-                <span class="">造梦后台登录</span>
+                <span class="">控台登录</span>
               </h1>
             </div>
 
@@ -28,14 +28,14 @@
                       <fieldset>
                         <label class="block clearfix">
                           <span class="block input-icon input-icon-right">
-                            <input v-model="user.loginName" type="text" class="form-control" placeholder="Username"/>
+                            <input v-model="user.loginName" type="text" class="form-control" placeholder="用户名"/>
                             <i class="ace-icon fa fa-user"></i>
                           </span>
                         </label>
 
                         <label class="block clearfix">
                           <span class="block input-icon input-icon-right">
-                            <input v-model="user.password" type="password" class="form-control" placeholder="Password"/>
+                            <input v-model="user.password" type="password" class="form-control" placeholder="密码"/>
                             <i class="ace-icon fa fa-lock"></i>
                           </span>
                         </label>
@@ -44,7 +44,7 @@
 
                         <div class="clearfix">
                           <label class="inline">
-                            <input type="checkbox" class="ace"/>
+                            <input v-model="remember" type="checkbox" class="ace"/>
                             <span class="lbl">记住我</span>
                           </label>
 
@@ -74,59 +74,71 @@
 </template>
 
 <script>
-  export default {
-    name: "login",
-    data: function() {
-      return {
-        user: {}
-      }
-    },
-    mounted: function() {
-      $("body").removeClass("no-skin");
-      $("body").attr("class", "login-layout light-login");
-      // console.log("login");
-    },
-    methods: {
-      login () {
-        let _this = this;
-        _this.user.password = hex_md5(_this.user.password + KEY);
-        _this.$ajax.post(process.env.VUE_APP_SERVER + '/system/admin/user/login', _this.user).then((response)=>{
-          let resp = response.data;
-          if (resp.success) {
-            Tool.setLoginUser(resp.content);
-            this.$router.push("/welcome")
-          } else {
-            Toast.warning(resp.message)
-          }
-        })
-      },
-      save() {
-        let _this = this;
-
-        // 保存校验
-        if (1 != 1
-            || !Validator.require(_this.user.loginName, "登陆名")
-            || !Validator.length(_this.user.loginName, "登陆名", 1, 50)
-            || !Validator.length(_this.user.name, "昵称", 1, 50)
-            || !Validator.require(_this.user.password, "密码")
-        ) {
-          return;
-        }
-
-        _this.user.password = hex_md5(_this.user.password + KEY);
-        Loading.show();
-        _this.$ajax.post(process.env.VUE_APP_SERVER + '/system/admin/user/save', _this.user).then((response)=>{
-          Loading.hide();
-          let resp = response.data;
-          if (resp.success) {
-            $("#form-modal").modal("hide");
-            _this.list(1);
-            Toast.success("保存成功！");
-          } else {
-            Toast.warning(resp.message)
-          }
-        })
-      }
+export default {
+  name: "login",
+  data: function () {
+    return {
+      user: {},
+      remember: true // 默认勾选记住我
     }
+  },
+  mounted: function () {
+    let _this = this;
+    $("body").removeClass("no-skin");
+    $("body").attr("class", "login-layout light-login");
+    // console.log("login");
+
+    // 从缓存中获取记住的用户名密码，如果获取不到，说明上一次没有勾选“记住我”
+    let rememberUser = LocalStorage.get(LOCAL_KEY_REMEMBER_USER);
+    if (rememberUser) {
+      _this.user = rememberUser;
+    }
+  },
+  methods: {
+    login() {
+      let _this = this;
+
+      // 将明文存储到缓存中
+      // let passwordShow = _this.user.password;
+
+      // 如果密码是从缓存带出来的，则不需要重新加密
+      let md5 = hex_md5(_this.user.password);
+      let rememberUser = LocalStorage.get(LOCAL_KEY_REMEMBER_USER) || {};
+      if (md5 !== rememberUser.md5) {
+        _this.user.password = hex_md5(_this.user.password + KEY);
+      }
+
+      Loading.show();
+      _this.$ajax.post(process.env.VUE_APP_SERVER + '/system/admin/user/login', _this.user).then((response) => {
+        Loading.hide();
+        let resp = response.data;
+        if (resp.success) {
+          console.log("登录成功：", resp.content);
+          let loginUser = resp.content;
+          Tool.setLoginUser(resp.content);
+
+          // 判断“记住我”
+          if (_this.remember) {
+            // 如果勾选记住我，则将用户名密码保存到本地缓存
+            // 原：这里需要保存密码明文，否则登录时又会再加一层密
+            // 新：这里保存密码密文，并保存密文md5，用于检测密码是否被重新输入过
+            let md5 = hex_md5(_this.user.password);
+            LocalStorage.set(LOCAL_KEY_REMEMBER_USER, {
+              loginName: loginUser.loginName,
+              // password: _this.user.passwordShow,
+              password: _this.user.password,
+              md5: md5
+            });
+          } else {
+            // 没有勾选“记住我”时，要把本地缓存清空，否则按照mounted的逻辑，下次打开时会自动显示用户名密码
+            LocalStorage.set(LOCAL_KEY_REMEMBER_USER, null);
+          }
+          _this.$router.push("/welcome")
+        } else {
+          Toast.warning(resp.message)
+        }
+      });
+    },
   }
+}
 </script>
