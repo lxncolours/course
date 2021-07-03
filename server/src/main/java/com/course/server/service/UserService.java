@@ -2,6 +2,7 @@ package com.course.server.service;
 
 import com.course.server.domain.User;
 import com.course.server.domain.UserExample;
+import com.course.server.dto.LoginUserDto;
 import com.course.server.dto.UserDto;
 import com.course.server.dto.PageDto;
 import com.course.server.exception.BusinessException;
@@ -100,5 +101,29 @@ public class UserService {
         user.setId(userDto.getId());
         user.setPassword(userDto.getPassword());
         userMapper.updateByPrimaryKeySelective(user);
+    }
+
+    /**
+     * 登录方法
+     * @param userDto
+     */
+    public LoginUserDto login(UserDto userDto) {
+
+        User user = selectByLoginName(userDto.getLoginName());
+        if (user == null){
+            throw new BusinessException(BusinessExceptionCode.LOGIN_USER_ERROR);
+        }else {
+            if (!user.getPassword().equals(userDto.getPassword()))
+                throw new BusinessException(BusinessExceptionCode.LOGIN_USER_ERROR);
+            else
+                return CopyUtil.copy(user, LoginUserDto.class);
+        }
+
+
+/*        UserExample userExample = new UserExample();
+        userExample.createCriteria().andLoginNameEqualTo(userDto.getLoginName()).andPasswordEqualTo(userDto.getPassword());
+        List<User> userList = userMapper.selectByExample(userExample);
+        if (CollectionUtils.isEmpty(userList))
+            throw new BusinessException(BusinessExceptionCode.LOGIN_USER_ERROR);*/
     }
 }
