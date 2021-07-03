@@ -1,10 +1,10 @@
 <template>
   <div>
-    <button type="button" v-on:click="selectFile()" className="btn btn-white btn-default btn-round">
-      <i className="ace-icon fa fa-upload"></i>
+    <button type="button" v-on:click="selectFile()" class="btn btn-white btn-default btn-round">
+      <i class="ace-icon fa fa-upload"></i>
       {{ text }}
     </button>
-    <input className="hidden" type="file" ref="file" v-on:change="uploadFile()" v-bind:id="inputId+'-input'">
+    <input class="hidden" type="file" ref="file" v-on:change="uploadFile()" v-bind:id="inputId+'-input'">
   </div>
 </template>
 
