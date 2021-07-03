@@ -7,6 +7,7 @@ import com.course.server.service.UserService;
 import com.course.server.util.ValidatorUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -37,6 +38,7 @@ public class UserController {
      */
     @PostMapping("/save")
     public ResponseDto save(@RequestBody UserDto userDto) {
+        userDto.setPassword(DigestUtils.md5DigestAsHex(userDto.getPassword().getBytes()));
         // 保存校验
         ValidatorUtil.require(userDto.getLoginName(), "登陆名");
         ValidatorUtil.length(userDto.getLoginName(), "登陆名", 1, 50);
@@ -56,6 +58,19 @@ public class UserController {
     public ResponseDto delete(@PathVariable String id) {
         ResponseDto responseDto = new ResponseDto();
         userService.delete(id);
+        return responseDto;
+    }
+
+    /**
+     * 重置密码
+     */
+    @PostMapping("/save-password")
+    public ResponseDto savePassword(@RequestBody UserDto userDto) {
+        userDto.setPassword(DigestUtils.md5DigestAsHex(userDto.getPassword().getBytes()));
+
+        ResponseDto responseDto = new ResponseDto();
+        userService.savePassword(userDto);
+        responseDto.setContent(userDto);
         return responseDto;
     }
 }
