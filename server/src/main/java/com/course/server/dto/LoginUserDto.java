@@ -21,6 +21,11 @@ public class LoginUserDto {
      */
     private String name;
 
+    /**
+     * redisToken
+     */
+    private String token;
+
 
 
 
@@ -49,6 +54,13 @@ public class LoginUserDto {
         this.name = name;
     }
 
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
 
     @Override
     public String toString() {
@@ -56,6 +68,7 @@ public class LoginUserDto {
                 "id='" + id + '\'' +
                 ", loginName='" + loginName + '\'' +
                 ", name='" + name + '\'' +
+                ", token='" + token + '\'' +
                 '}';
     }
 }

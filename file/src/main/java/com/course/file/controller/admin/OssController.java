@@ -43,7 +43,7 @@ public class OssController {
     @Value("${oss.domain}")
     private String ossDomain;
 
-    public static final String BUSINESS_NAME = "文件上传";
+    public static final String BUSINESS_NAME = "OSS";
 
     @Resource
     private FileService fileService;
