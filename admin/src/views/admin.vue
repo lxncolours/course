@@ -373,11 +373,12 @@
             <b class="arrow"></b>
 
             <ul class="submenu">
-              <li class="">
-                <a href="tables.html">
+
+              <li class="" id="system-user-sidebar">
+                <router-link to="/system/user">
                   <i class="menu-icon fa fa-caret-right"></i>
                   用户管理
-                </a>
+                </router-link>
 
                 <b class="arrow"></b>
               </li>
@@ -517,6 +518,7 @@
       // console.log("admin");
       // sidebar激活样式方法二
       _this.activeSidebar(_this.$route.name.replace("/", "-") + "-sidebar");
+      $.getScript('/ace/assets/js/ace.min.js');
     },
     watch: {
       $route: {
@@ -549,6 +551,7 @@
         let parentLi = $("#" + id).parents("li");
         if (parentLi) {
           parentLi.siblings().removeClass("open active");
+          parentLi.siblings().find("li").removeClass("active");
           parentLi.addClass("open active");
         }
       }

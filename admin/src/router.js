@@ -10,6 +10,7 @@ import Section from "./views/admin/section.vue"
 import Teacher from "./views/admin/teacher.vue"
 import Content from "./views/admin/content.vue"
 import File from "./views/admin/file.vue"
+import User from "./views/admin/user.vue"
 
 Vue.use(Router);
 
@@ -18,6 +19,9 @@ export default new Router({
     base: process.env.BASE_URL,
     routes: [{
         path: "*",
+        redirect: "/login",
+    },{
+        path: "",
         redirect: "/login",
     }, {
         path: "/login",
@@ -58,6 +62,10 @@ export default new Router({
             path: "file/file",
             name: "file/file",
             component: File,
+        }, {
+            path: "system/user",
+            name: "system/user",
+            component: User,
         }]
     }]
 })
